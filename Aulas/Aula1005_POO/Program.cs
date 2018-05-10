@@ -21,9 +21,12 @@ namespace Aula1005_POO
             //Utilizando os construtores parametrizados
             Cliente cli2 = new Cliente("Zelda"); //nome
 
+            Console.WriteLine("cli2.Nome: " + cli2.Nome);
+
             Cliente cli3 = new Cliente("Saria", "123"); //nome, cpf
 
-
+            //ERRO: classes abstratas não podem ser instanciadas
+            //Pessoa p = new Pessoa();
 
             Console.ReadKey();
         }
