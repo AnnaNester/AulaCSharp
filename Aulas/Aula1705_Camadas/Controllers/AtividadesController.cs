@@ -6,11 +6,16 @@ namespace Aula1705_Camadas.Controllers
     class AtividadesController
     {
         //simular tabela
-        public List<Atividade> ListaAtividades { get; set; }
+        private static List<Atividade> ListaAtividades { get; set; }
 
+        static AtividadesController()
+        {
+            ListaAtividades = new List<Atividade>();
+        }
         //Salvar
         public void Salvar(Atividade atividade)
         {
+            atividade.AtividadeID = ListaAtividades.Count + 1;
             ListaAtividades.Add(atividade);
         }
         //Listar
