@@ -23,7 +23,7 @@ namespace Aula1705_Camadas.Controllers
         {
             foreach (Atividade a in ListaAtividades)
             {
-                if(a.AtividadeID == id)
+                if (a.AtividadeID == id)
                 {
                     return a;
                 }
@@ -34,7 +34,7 @@ namespace Aula1705_Camadas.Controllers
         public void Editar(int id, Atividade atividadeAtualizada)
         {
             Atividade atividadeAntiga = BuscarPorID(id);
-            if(atividadeAntiga != null)
+            if (atividadeAntiga != null)
             {
                 atividadeAntiga.Nome = atividadeAtualizada.Nome;
                 atividadeAntiga.Ativo = atividadeAtualizada.Ativo;
@@ -42,6 +42,14 @@ namespace Aula1705_Camadas.Controllers
         }
 
         //Excluir
-        
+        public void Excluir(int id)
+        {
+            Atividade atividade = BuscarPorID(id);
+
+            if(atividade != null)
+            {
+                ListaAtividades.Remove(atividade);
+            }
+        }
     }
 }
