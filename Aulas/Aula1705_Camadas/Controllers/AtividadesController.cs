@@ -31,7 +31,17 @@ namespace Aula1705_Camadas.Controllers
             return null;
         }
         //Editar
-        //Excluir
+        public void Editar(int id, Atividade atividadeAtualizada)
+        {
+            Atividade atividadeAntiga = BuscarPorID(id);
+            if(atividadeAntiga != null)
+            {
+                atividadeAntiga.Nome = atividadeAtualizada.Nome;
+                atividadeAntiga.Ativo = atividadeAtualizada.Ativo;
+            }
+        }
 
+        //Excluir
+        
     }
 }
