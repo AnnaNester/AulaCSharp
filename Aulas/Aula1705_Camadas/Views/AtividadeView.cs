@@ -1,6 +1,7 @@
 ﻿using Aula1705_Camadas.Controllers;
 using Aula1705_Camadas.Models;
 using System;
+using System.Collections.Generic;
 
 namespace Aula1705_Camadas.Views
 {
@@ -118,30 +119,25 @@ namespace Aula1705_Camadas.Views
         public void ListarAtividadesAtivos()
         {
             atividadeController = new AtividadesController();
-            Console.WriteLine("Deseja buscar atividades ativas? (s/n): ");
-            string busca = Console.ReadLine();
-            if (busca == "s" ? true : false)
+            Console.WriteLine ("Pesquisando por Ativos/Inativos");
+            Console.WriteLine("Deseja pesquisar itens ativos(a) ou inativos (i)? (a/i): ");
+            bool resposta = Console.ReadLine() == "a" ? true : false;
+
+            List<Atividade> lista = atividadeController.BuscarAtivoInativo(resposta);
+
+            if (lista.Count > 0)
             {
-                Console.WriteLine("Listando atividade ativas");
-                foreach (Atividade atividade in atividadeController.Listar())
+                foreach (Atividade a in lista)
                 {
-                    if (atividade.Ativo == true)
-                        ExibirDetalhesAtividade(atividade);
+                    ExibirDetalhesAtividade(a);
                 }
-                Console.WriteLine("Fim da lista");
-                Console.ReadKey();
             }
             else
-            {
-                Console.WriteLine("Listando atividade inativas");
-                foreach (Atividade atividade in atividadeController.Listar())
-                {
-                    if (atividade.Ativo == false)
-                        ExibirDetalhesAtividade(atividade);
-                }
-                Console.WriteLine("Fim da lista");
-                Console.ReadKey();
-            }
+                Console.WriteLine("Lista vazia");
+
+            Console.WriteLine("Fim da lista de Atividades Ativo/Inativo");
+            Console.ReadKey();
+
         }
 
         public void BuscarAtividade()
@@ -167,15 +163,16 @@ namespace Aula1705_Camadas.Views
         {
             atividadeController = new AtividadesController();
             Console.Write("Digite o nome da atividade: ");
-            string nome = Console.ReadLine();
+            string atividade = Console.ReadLine();
+            List<Atividade> lista = atividadeController.BuscarPorNome(atividade);
 
-            Console.WriteLine("Exibindo lista de atividades por nome");
-            foreach (Atividade a in atividadeController.BuscarPorNome(nome))
+            if (lista.Count > 0)
             {
-                ExibirDetalhesAtividade(a);
+                foreach (Atividade a in lista)
+                {
+                    ExibirDetalhesAtividade(a);
+                }
             }
-            Console.WriteLine("Fim da lista de atividades por nome");
-            Console.ReadKey();
         }
 
         public void EditarAtividade()
