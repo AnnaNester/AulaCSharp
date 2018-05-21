@@ -35,6 +35,20 @@ namespace Aula1705_Camadas.Controllers
             }
             return null;
         }
+
+        public List<Atividade> BuscarPorNome(string nome)
+        {
+            List<Atividade> atividadeSelecionadas = new List<Atividade>();
+            foreach (Atividade a in ListaAtividades)
+            {
+                if (a.Nome.ToLower().Contains(nome.ToLower()))
+                {
+                    atividadeSelecionadas.Add(a);
+                }
+            }
+            return atividadeSelecionadas;
+        }
+
         //Editar
         public void Editar(int id, Atividade atividadeAtualizada)
         {
