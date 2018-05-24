@@ -21,6 +21,11 @@ namespace Aula1705_Camadas.Views
             Sair = 9
         }
 
+        public AtividadeView()
+        {
+            atividadeController = new AtividadesController();
+        }
+
         public void ExibirMenu()
         {
             OpcoesMenu opcao = OpcoesMenu.Sair;
@@ -79,8 +84,6 @@ namespace Aula1705_Camadas.Views
         public void CriarAtividade()
         {
             Atividade atividade = ObterDadosAtividade();
-
-            atividadeController = new AtividadesController();
             atividadeController.Salvar(atividade);
         }
 
@@ -106,7 +109,6 @@ namespace Aula1705_Camadas.Views
 
         public void ListarAtividades()
         {
-            atividadeController = new AtividadesController();
             Console.WriteLine("Listando atividade cadastradas");
             foreach (Atividade atividade in atividadeController.Listar())
             {
@@ -118,7 +120,6 @@ namespace Aula1705_Camadas.Views
 
         public void ListarAtividadesAtivos()
         {
-            atividadeController = new AtividadesController();
             Console.WriteLine ("Pesquisando por Ativos/Inativos");
             Console.WriteLine("Deseja pesquisar itens ativos(a) ou inativos (i)? (a/i): ");
             bool resposta = Console.ReadLine() == "a" ? true : false;
@@ -142,7 +143,6 @@ namespace Aula1705_Camadas.Views
 
         public void BuscarAtividade()
         {
-            atividadeController = new AtividadesController();
             Console.Write("Digite o id da atividade: ");
             int id = int.Parse(Console.ReadLine());
 
@@ -161,7 +161,6 @@ namespace Aula1705_Camadas.Views
 
         public void BuscarAtividadeNome()
         {
-            atividadeController = new AtividadesController();
             Console.Write("Digite o nome da atividade: ");
             string atividade = Console.ReadLine();
             List<Atividade> lista = atividadeController.BuscarPorNome(atividade);
@@ -182,7 +181,6 @@ namespace Aula1705_Camadas.Views
             int id = int.Parse(Console.ReadLine());
 
             Atividade atividadeAtualizada = ObterDadosAtividade();
-            atividadeController = new AtividadesController();
             atividadeController.Editar(id, atividadeAtualizada);
         }
 
@@ -192,7 +190,6 @@ namespace Aula1705_Camadas.Views
             Console.Write("Digite o id da atividade que deseja excluir: ");
             int id = int.Parse(Console.ReadLine());
 
-            atividadeController = new AtividadesController();
             atividadeController.Excluir(id);
         }
     }
