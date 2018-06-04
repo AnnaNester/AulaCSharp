@@ -2,56 +2,65 @@
 using Modelos;
 using System.Collections.Generic;
 using System;
+using Controllers.DAL;
+using System.Linq;
 
 namespace Controllers
 {
     class AtividadesController : IBaseController<Atividade>
     {
-        private List<Atividade> listaAtividades { get; set; }
+        private Contexto contexto = new Contexto();
 
         private static int ultimoID = 0;
 
-        public void Adicionar(Atividade atividade)
+        public void Adicionar(Atividade entity)
         {
-            atividade.AtividadeID = ++ultimoID;
-            listaAtividades.Add(atividade);
+            contexto.Atividades.Add(entity);
+            contexto.SaveChanges();
         }
 
         public IList<Atividade> ListarTodos()
         {
-            return listaAtividades;
+            return contexto.Atividades.ToList();
         }
 
         public IList<Atividade> ListarPorNome(string nome)
         {
-            throw new NotImplementedException();
+            //var atividadesComNome = from a in contexto.Atividades
+            //            where a.Nome == nome
+            //            select a;
+
+            //return atividadesComNome.ToList();
+
+            //LAMBDA
+            return contexto.Atividades.Where(a => a.Nome.ToLower() == nome.ToLower()).ToList();
         }
 
         public Atividade BuscarPorID(int id)
         {
-            foreach (Atividade a in listaAtividades)
-            {
-                if (a.AtividadeID == id)
-                {
-                    return a;
-                }
-            }
-            return null;
+            return contexto.Atividades.Find();
         }
 
-        public void Atualizar(Atividade atividadeAtualizada, int id)
+        public void Atualizar(Atividade entity)
         {
-            Atividade atividadeAntiga = BuscarPorID(id);
-            if (atividadeAntiga != null)
-            {
-                atividadeAntiga.Nome = atividadeAtualizada.Nome;
-                atividadeAntiga.Ativo = atividadeAtualizada.Ativo;
-            }
+            contexto.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+
+            contexto.SaveChanges();
         }
 
         public void Excluir(int id)
         {
-            throw new NotImplementedException();
+            Atividade a = BuscarPorID(id);
+            if (a != null)
+            {
+                //forma 1
+                contexto.Atividades.Remove(a);
+
+                //forma 2
+                //contexto.Entry(a).State = System.Data.Entity.EntityState.Deleted;
+
+                contexto.SaveChanges();
+            }
         }
     }
 }
