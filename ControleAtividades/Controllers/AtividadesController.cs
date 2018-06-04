@@ -39,9 +39,14 @@ namespace Controllers
             return null;
         }
 
-        public void Atualizar(Atividade atividade)
+        public void Atualizar(Atividade atividadeAtualizada, int id)
         {
-            throw new NotImplementedException();
+            Atividade atividadeAntiga = BuscarPorID(id);
+            if (atividadeAntiga != null)
+            {
+                atividadeAntiga.Nome = atividadeAtualizada.Nome;
+                atividadeAntiga.Ativo = atividadeAtualizada.Ativo;
+            }
         }
 
         public void Excluir(int id)
