@@ -2,6 +2,8 @@
 using Modelos;
 using System.Collections.Generic;
 using System;
+using Controllers.DAL;
+using System.Linq;
 
 namespace Controllers
 {
@@ -9,12 +11,12 @@ namespace Controllers
     {
         private List<Usuario> listaUsuarios { get; set; }
 
-        private static int ultimoID = 0;
+        private Contexto contexto = new Contexto();
 
-        public void Adicionar(Usuario usuario)
+        public void Adicionar(Usuario entity)
         {
-            usuario.UsuarioID = ++ultimoID;
-            listaUsuarios.Add(usuario);
+            contexto.Usuarios.Add(entity);
+            contexto.SaveChanges();
         }
 
         public IList<Usuario> ListarTodos()
@@ -24,29 +26,31 @@ namespace Controllers
 
         public IList<Usuario> ListarPorNome(string nome)
         {
-            throw new NotImplementedException();
+            return contexto.Usuarios.Where(a => a.Nome.ToLower() == nome.ToLower()).ToList();
         }
 
         public Usuario BuscarPorID(int id)
         {
-            foreach (Usuario a in listaUsuarios)
-            {
-                if (a.UsuarioID == id)
-                {
-                    return a;
-                }
-            }
-            return null;
+            return contexto.Usuarios.Find();
         }
 
-        public void Atualizar(Usuario usuario)
+        public void Atualizar(Usuario entity)
         {
-            throw new NotImplementedException();
+            contexto.Entry(entity).State = System.Data.Entity.EntityState.Modified;
+
+            contexto.SaveChanges();
         }
 
         public void Excluir(int id)
         {
-            throw new NotImplementedException();
+            Usuario a = BuscarPorID(id);
+
+            if (a != null)
+            {
+                contexto.Usuarios.Remove(a);
+
+                contexto.SaveChanges();
+            }
         }
     }
 }

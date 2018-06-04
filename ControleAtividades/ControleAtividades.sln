@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Controllers", "Controllers\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleView", "ConsoleView\ConsoleView.csproj", "{FCBE85AA-196C-45BE-AC47-43E2734BA4EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfView", "WpfView\WpfView.csproj", "{77B75EEA-3047-425C-AB4C-1774DAD102CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FCBE85AA-196C-45BE-AC47-43E2734BA4EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCBE85AA-196C-45BE-AC47-43E2734BA4EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCBE85AA-196C-45BE-AC47-43E2734BA4EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77B75EEA-3047-425C-AB4C-1774DAD102CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77B75EEA-3047-425C-AB4C-1774DAD102CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77B75EEA-3047-425C-AB4C-1774DAD102CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77B75EEA-3047-425C-AB4C-1774DAD102CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
